@@ -1,0 +1,12 @@
+title: Colophon
+description: A short note on how the site is made — type, tools, and principles
+fields:
+    heading:
+        type: text
+        label: Heading
+        default: "Colophon"
+    body:
+        type: textarea
+        label: Body
+        rows: 4
+        default: "This site is set in Source Serif 4 and Geist, styled with Tailwind CSS, and served as plain static pages. Dark mode is a true near-black, page turns are real view transitions, and nothing here tracks you."

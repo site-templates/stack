@@ -1,0 +1,73 @@
+title: Masthead
+description: The editorial introduction — your name, a serif statement, a short bio, social links, and the portrait
+fields:
+    name:
+        type: text
+        label: Name
+        default: "Elliot Hayes"
+    statement:
+        type: textarea
+        label: Statement
+        rows: 3
+        default: "I build software with a strong bias for design, clarity, and fast iteration."
+    bio:
+        type: textarea
+        label: Bio
+        rows: 3
+        default: "I'm a design engineer working across design systems, product engineering, and the interfaces where the two meet. This site is where I write it down."
+    bioTwo:
+        type: textarea
+        label: Second bio paragraph
+        rows: 3
+        default: "Most of what I ship is TypeScript, CSS, and pragmatic systems design — most of what I care about is how it feels to use."
+    company:
+        type: text
+        label: Company
+        default: "Northwind"
+    location:
+        type: text
+        label: Location
+        default: "Portland, Oregon"
+    portrait:
+        type: image
+        label: Portrait
+        default: "/images/portrait.jpg"
+    portraitAlt:
+        type: text
+        label: Portrait alt text
+        default: "Black-and-white portrait of Elliot Hayes"
+    showPortrait:
+        type: toggle
+        label: Show the portrait
+        default: "1"
+    showSocial:
+        type: toggle
+        label: Show social links
+        default: "1"
+    links:
+        type: repeater
+        label: Social links
+        source: site.social
+        add_button_label: "Add link"
+        item_label: label
+        sub_fields:
+            label:
+                type: text
+                label: Label
+                default: "New link"
+            icon:
+                type: select
+                label: Icon
+                default: "email"
+                options:
+                    email: Email
+                    github: GitHub
+                    linkedin: LinkedIn
+                    x: X
+                    instagram: Instagram
+                    youtube: YouTube
+                    rss: RSS
+            url:
+                type: url
+                label: Link
+                default: "#"

@@ -1,0 +1,35 @@
+{
+    "name": "Elliot Hayes",
+    "nav_links": [
+        {
+            "text": "Writing",
+            "url": "/"
+        },
+        {
+            "text": "About",
+            "url": "/about"
+        }
+    ],
+    "social": [
+        {
+            "label": "Email",
+            "icon": "email",
+            "url": "mailto:hello@example.com"
+        },
+        {
+            "label": "GitHub",
+            "icon": "github",
+            "url": "https://github.com"
+        },
+        {
+            "label": "LinkedIn",
+            "icon": "linkedin",
+            "url": "https://www.linkedin.com"
+        },
+        {
+            "label": "X",
+            "icon": "x",
+            "url": "https://x.com"
+        }
+    ]
+}

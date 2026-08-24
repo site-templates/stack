@@ -1,0 +1,22 @@
+title: About Intro
+description: The about page opener — a heading in the left rail, a serif pull statement and two paragraphs on the right
+fields:
+    heading:
+        type: text
+        label: Heading
+        default: "About"
+    intro:
+        type: textarea
+        label: Pull statement
+        rows: 3
+        default: "I make software feel inevitable — like it could not have been built any other way."
+    body:
+        type: textarea
+        label: First paragraph
+        rows: 4
+        default: "I've spent a decade on the seam between design and engineering: building design systems, tuning interfaces until they answer instantly, and writing down what I learn along the way. The essays here are field notes, not theory — everything comes from something I shipped, broke, or fixed."
+    bodyTwo:
+        type: textarea
+        label: Second paragraph
+        rows: 4
+        default: "Away from a screen I'm usually on a bicycle, in a used bookstore, or making espresso I describe as \"research.\" If you want to talk shop, my inbox is open."

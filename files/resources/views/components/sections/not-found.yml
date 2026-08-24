@@ -1,0 +1,20 @@
+title: Not Found
+description: The 404 message — a serif heading, one explanation, and the way back home
+fields:
+    heading:
+        type: text
+        label: Heading
+        default: "This page moved on."
+    body:
+        type: textarea
+        label: Body
+        rows: 3
+        default: "Whatever lived here has been renamed, unpublished, or was never written. The writing index has everything that still exists."
+    buttonText:
+        type: text
+        label: Button text
+        default: "Back to the writing"
+    buttonLink:
+        type: url
+        label: Button link
+        default: "/"

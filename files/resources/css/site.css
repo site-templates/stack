@@ -1,0 +1,327 @@
+/*
+    Stack — tokens, dark mode, the motion system, and article typography.
+
+    This file is inlined right after Tailwind by @vite in the layout, so
+    everything here applies to every page. The tokens become real utilities:
+    bg-canvas, bg-surface, text-ink, text-muted, text-faint, border-line,
+    bg-accent, text-accent-ink, font-display, font-sans.
+
+    Dark mode is class-based — main.js owns the .dark class on <html> and the
+    pre-paint script in the layout head applies the saved (or system) choice
+    before first paint. The .dark block below re-declares the same tokens, so
+    section markup never needs a dark: prefix.
+*/
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Ground */
+    --color-canvas: #ffffff;
+    --color-surface: #f7f7f7;
+    --color-line: rgb(17 17 17 / 0.08);
+
+    /* Text */
+    --color-ink: #111111;
+    --color-muted: #6f6f76;
+    --color-faint: color-mix(in oklab, #6f6f76 55%, #ffffff);
+
+    /* The one solid button, selection, focus */
+    --color-accent: #111111;
+    --color-accent-ink: #ffffff;
+
+    /* Type — the serif editorial voice and the Geist text face */
+    --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-display--font-variation-settings: "opsz" 40;
+    --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+    /* One easing family for everything interactive */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* True near-black dark — never a blue-black. Same tokens, new values. */
+.dark {
+    --color-canvas: #111111;
+    --color-surface: #19191b;
+    --color-line: rgb(255 255 255 / 0.1);
+    --color-ink: #f4f4f3;
+    --color-muted: #9d9da4;
+    --color-faint: color-mix(in oklab, #9d9da4 55%, #111111);
+    --color-accent: #f4f4f3;
+    --color-accent-ink: #111111;
+}
+
+html {
+    background-color: var(--color-canvas);
+    color-scheme: light;
+    scrollbar-color: color-mix(in oklab, var(--color-muted) 45%, var(--color-canvas)) transparent;
+}
+
+html.dark {
+    color-scheme: dark;
+}
+
+/* One stray wide element must never give the page a sideways scroll. */
+body {
+    overflow-x: clip;
+}
+
+::selection {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/*
+    The quiet page turn — cross-document view transitions crossfade the whole
+    page on every navigation, so the site feels like one continuous surface.
+*/
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 220ms;
+    animation-timing-function: ease;
+}
+
+/*
+    The reveal system. main.js adds .js to <html> before first paint, then an
+    IntersectionObserver flips .is-visible as each [data-reveal] scrolls into
+    view. Without JavaScript nothing is ever hidden. Stagger a group with the
+    reveal-1..5 utility classes.
+*/
+.js [data-reveal] {
+    opacity: 0;
+    translate: 0 14px;
+    transition:
+        opacity 0.7s var(--ease-spring),
+        translate 0.7s var(--ease-spring);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal].is-visible {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.reveal-1 { --reveal-delay: 70ms; }
+.reveal-2 { --reveal-delay: 140ms; }
+.reveal-3 { --reveal-delay: 210ms; }
+.reveal-4 { --reveal-delay: 280ms; }
+.reveal-5 { --reveal-delay: 350ms; }
+
+/*
+    Pagination — the post list turns pages in place. main.js hides rows
+    outside the current page and replays this entrance on the visible ones,
+    setting --stagger per row so the ledger settles line by line.
+*/
+@keyframes page-enter {
+    from {
+        opacity: 0;
+        translate: 0 10px;
+    }
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+.js [data-post-row].is-entering {
+    animation: page-enter 0.5s var(--ease-spring) both;
+    animation-delay: var(--stagger, 0ms);
+}
+
+/*
+    The reading progress hairline on article pages. main.js drives --progress
+    from scroll position; the bar only exists where the markup includes it.
+*/
+[data-progress] {
+    transform-origin: left center;
+    scale: var(--progress, 0) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] {
+        opacity: 1;
+        translate: 0 0;
+        transition: none;
+    }
+
+    .js [data-post-row].is-entering {
+        animation: none;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/*
+    The nav: transparent and roomy at the top; once the page scrolls under it,
+    main.js sets data-scrolled and it tightens into a translucent hairlined bar.
+*/
+#header {
+    border-bottom: 1px solid transparent;
+    transition:
+        background-color 0.4s ease,
+        border-color 0.4s ease;
+}
+
+#header[data-scrolled] {
+    background-color: color-mix(in oklab, var(--color-canvas) 82%, transparent);
+    border-bottom-color: var(--color-line);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/*
+    Article typography. Post bodies are plain HTML from the collection, so
+    they are styled here by element. Width is set in the markup with a
+    max-w-[68ch] class next to `prose`.
+*/
+.prose {
+    color: color-mix(in oklab, var(--color-ink) 82%, var(--color-canvas));
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    text-wrap: pretty;
+}
+
+.prose > * + * {
+    margin-top: 1.5em;
+}
+
+.prose p.lead {
+    color: var(--color-ink);
+    font-size: 1.1875rem;
+    line-height: 1.7;
+}
+
+.prose h2 {
+    margin-top: 2.5em;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+}
+
+.prose h3 {
+    margin-top: 2.1em;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    text-wrap: balance;
+}
+
+.prose strong {
+    color: var(--color-ink);
+    font-weight: 600;
+}
+
+.prose a {
+    color: var(--color-ink);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--color-ink) 30%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.prose a:hover {
+    text-decoration-color: var(--color-ink);
+}
+
+.prose ul,
+.prose ol {
+    padding-left: 1.4em;
+}
+
+.prose ul {
+    list-style: disc;
+}
+
+.prose ol {
+    list-style: decimal;
+}
+
+.prose li {
+    margin-top: 0.5em;
+    padding-left: 0.25em;
+}
+
+.prose li::marker {
+    color: var(--color-faint);
+}
+
+.prose blockquote {
+    border-left: 2px solid var(--color-ink);
+    padding-left: 1.5em;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 1.1875rem;
+    line-height: 1.65;
+    font-style: italic;
+}
+
+.prose code {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 0.875em;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 5px;
+    padding: 0.12em 0.35em;
+}
+
+.prose pre {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    padding: 1.25em 1.5em;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.7;
+}
+
+.prose pre code {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-size: inherit;
+    color: color-mix(in oklab, var(--color-ink) 88%, var(--color-canvas));
+}
+
+.prose hr {
+    margin-block: 3em;
+    border: 0;
+    border-top: 1px solid var(--color-line);
+}
+
+.prose img {
+    width: 100%;
+    border-radius: min(1vw, 12px);
+    outline: 1px solid var(--color-line);
+    outline-offset: -1px;
+}
+
+.prose figcaption {
+    margin-top: 0.9em;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    text-align: center;
+}

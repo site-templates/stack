@@ -1,0 +1,15 @@
+{
+    "name": "Stack",
+    "dialect": "blade",
+    "description": "A monochrome personal blog with a serif editorial voice, a ledger-style post list, and a quiet page-turn motion system — light and true-black dark.",
+    "icon": "🗂️",
+    "repo": "https://github.com/site-templates/stack",
+    "order": 25,
+    "category": "blog",
+    "theme": "light",
+    "accent": "#111111",
+    "pages": [
+        "Home",
+        "About"
+    ]
+}

@@ -1,0 +1,29 @@
+# The visual editor's contract for components/nav.blade.php — these fields
+# surface under the Layout tab. Field names are camelCase, matching the props
+# they fill.
+title: Navigation
+description: The fixed top bar — the wordmark, the page links, and the theme toggle
+fields:
+    brand:
+        type: text
+        label: Wordmark
+        default: "Elliot Hayes"
+    links:
+        type: repeater
+        label: Navigation links
+        source: site.nav_links
+        add_button_label: "Add link"
+        item_label: text
+        sub_fields:
+            text:
+                type: text
+                label: Text
+                default: "New link"
+            url:
+                type: url
+                label: Link
+                default: "/"
+    showThemeToggle:
+        type: toggle
+        label: Show the light/dark toggle
+        default: "1"

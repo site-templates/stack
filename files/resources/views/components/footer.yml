@@ -1,0 +1,40 @@
+# The visual editor's contract for components/footer.blade.php — these fields
+# surface under the Layout tab.
+title: Footer
+description: The single hairline row at the bottom — a copyright note and text links to your profiles
+fields:
+    note:
+        type: text
+        label: Copyright note
+        default: "© 2026 Elliot Hayes"
+    showSocial:
+        type: toggle
+        label: Show social links
+        default: "1"
+    social:
+        type: repeater
+        label: Social links
+        source: site.social
+        add_button_label: "Add link"
+        item_label: label
+        sub_fields:
+            label:
+                type: text
+                label: Label
+                default: "New link"
+            icon:
+                type: select
+                label: Icon
+                default: "email"
+                options:
+                    email: Email
+                    github: GitHub
+                    linkedin: LinkedIn
+                    x: X
+                    instagram: Instagram
+                    youtube: YouTube
+                    rss: RSS
+            url:
+                type: url
+                label: Link
+                default: "#"

@@ -1,0 +1,31 @@
+title: Experience
+description: A ledger of roles from the experience collection — period, role, company, and a one-line summary
+fields:
+    heading:
+        type: text
+        label: Heading
+        default: "Experience"
+    items:
+        type: repeater
+        label: Roles
+        source: experience
+        add_button_label: "Add role"
+        item_label: role
+        sub_fields:
+            role:
+                type: text
+                label: Role
+                default: "New role"
+            company:
+                type: text
+                label: Company
+                default: "Company"
+            period:
+                type: text
+                label: Period
+                default: "2026 — Present"
+            summary:
+                type: textarea
+                label: Summary
+                rows: 2
+                default: ""

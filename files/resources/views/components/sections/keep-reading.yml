@@ -1,0 +1,7 @@
+title: Keep Reading
+description: A short run of other posts at the foot of an article — the current one is skipped automatically
+fields:
+    heading:
+        type: text
+        label: Heading
+        default: "Keep reading"

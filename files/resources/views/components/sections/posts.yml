@@ -1,0 +1,18 @@
+title: Post Ledger
+description: The paginated writing index — a date column, serif titles, and one-line excerpts from the posts collection
+fields:
+    heading:
+        type: text
+        label: Heading
+        default: "Writing"
+    perPage:
+        type: number
+        label: Posts per page
+        min: 1
+        max: 20
+        step: 1
+        default: "5"
+    showPagination:
+        type: toggle
+        label: Show pagination
+        default: "1"
