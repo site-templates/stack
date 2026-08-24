@@ -6,7 +6,7 @@ fields:
     note:
         type: text
         label: Copyright note
-        default: "© 2026 Elliot Hayes"
+        default: "© 2026 Oliver Rhodes"
     showSocial:
         type: toggle
         label: Show social links

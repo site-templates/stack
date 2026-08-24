@@ -1,4 +1,4 @@
-@props(['brand' => 'Elliot Hayes', 'links' => [], 'showThemeToggle' => '1'])
+@props(['brand' => 'Oliver Rhodes', 'links' => [], 'showThemeToggle' => '1'])
 <!-- The nav is fixed, so this invisible div stands in for its height in the page flow -->
 <div class="h-16 w-full"></div>
 

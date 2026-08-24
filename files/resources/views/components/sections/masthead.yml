@@ -4,7 +4,7 @@ fields:
     greeting:
         type: text
         label: Greeting
-        default: "Hi, I'm Elliot."
+        default: "Hi, I'm Oliver."
     statement:
         type: textarea
         label: Statement
@@ -35,7 +35,7 @@ fields:
     portraitAlt:
         type: text
         label: Portrait alt text
-        default: "Halftone black-and-white portrait of Elliot Hayes"
+        default: "Halftone black-and-white portrait of Oliver Rhodes"
     showPortrait:
         type: toggle
         label: Show the portrait

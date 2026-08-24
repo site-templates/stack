@@ -1,4 +1,4 @@
-@props(['title' => 'Elliot Hayes', 'description' => 'Writing on software, design, and the craft between them.'])
+@props(['title' => 'Oliver Rhodes', 'description' => 'Writing on software, design, and the craft between them.'])
 <!DOCTYPE html>
 <html lang="en">
 <head>

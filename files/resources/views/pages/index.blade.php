@@ -1,5 +1,5 @@
 <x-layouts.main
-    title="Elliot Hayes — Writing on software, design, and craft"
+    title="Oliver Rhodes — Writing on software, design, and craft"
     description="Essays from the seam between design and engineering: design systems, interface performance, and the practice of shipping well.">
 
     <x-sections.masthead :links="$site->social"/>

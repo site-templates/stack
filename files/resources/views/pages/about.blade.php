@@ -1,5 +1,5 @@
 <x-layouts.main
-    title="About — Elliot Hayes"
+    title="About — Oliver Rhodes"
     description="A design engineer's field notes: who I am, where I've worked, and how this site is made.">
 
     <x-sections.about/>

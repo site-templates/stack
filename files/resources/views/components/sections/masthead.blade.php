@@ -1,12 +1,12 @@
 @props([
-    'greeting' => "Hi, I'm Elliot.",
+    'greeting' => "Hi, I'm Oliver.",
     'statement' => 'I build software with a strong bias for design and clarity.',
     'bio' => 'I work where design systems meet product engineering. This site is where I write it down.',
     'bioTwo' => '',
     'company' => 'Northwind',
     'location' => 'Portland, Oregon',
     'portrait' => '/images/portrait.webp',
-    'portraitAlt' => 'Halftone black-and-white portrait of Elliot Hayes',
+    'portraitAlt' => 'Halftone black-and-white portrait of Oliver Rhodes',
     'showPortrait' => '1',
     'showSocial' => '1',
     'links' => [],
@@ -44,7 +44,7 @@
             @if ($showPortrait)
                 <!-- The portrait graphic: a halftone duotone on transparency whose shoulders fade into the canvas. Pure black dots read as ink in light mode; dark inverts them to white, so one file serves both themes. -->
                 <div data-reveal class="reveal-1 max-lg:order-first lg:justify-self-end">
-                    <img src="{{ $portrait }}" alt="{{ $portraitAlt }}" width="720" height="919" class="portrait-fade h-auto w-60 dark:invert sm:w-72 lg:w-88">
+                    <img src="{{ $portrait }}" alt="{{ $portraitAlt }}" width="720" height="1027" class="portrait-fade h-auto w-60 dark:invert sm:w-72 lg:w-88">
                 </div>
             @endif
         </div>

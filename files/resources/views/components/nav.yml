@@ -7,7 +7,7 @@ fields:
     brand:
         type: text
         label: Wordmark
-        default: "Elliot Hayes"
+        default: "Oliver Rhodes"
     links:
         type: repeater
         label: Navigation links

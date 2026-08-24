@@ -1,4 +1,4 @@
-@props(['note' => '© 2026 Elliot Hayes', 'social' => [], 'showSocial' => '1'])
+@props(['note' => '© 2026 Oliver Rhodes', 'social' => [], 'showSocial' => '1'])
 <footer class="border-t border-line">
     <div class="mx-auto flex max-w-4xl flex-col gap-y-6 px-6 py-12 sm:flex-row sm:items-center sm:justify-between">
         <p class="text-base text-muted sm:text-sm">{{ $note }}</p>
