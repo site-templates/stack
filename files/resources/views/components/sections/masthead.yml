@@ -35,7 +35,7 @@ fields:
     portraitAlt:
         type: text
         label: Portrait alt text
-        default: "Black-and-white portrait of Elliot Hayes"
+        default: "Halftone black-and-white portrait of Elliot Hayes"
     showPortrait:
         type: toggle
         label: Show the portrait

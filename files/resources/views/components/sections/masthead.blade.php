@@ -6,7 +6,7 @@
     'company' => 'Northwind',
     'location' => 'Portland, Oregon',
     'portrait' => '/images/portrait.webp',
-    'portraitAlt' => 'Black-and-white portrait of Elliot Hayes',
+    'portraitAlt' => 'Halftone black-and-white portrait of Elliot Hayes',
     'showPortrait' => '1',
     'showSocial' => '1',
     'links' => [],
@@ -42,9 +42,9 @@
             </div>
 
             @if ($showPortrait)
-                <!-- The portrait graphic: a background-free cutout whose shoulders fade into the canvas, so it melts into white and near-black alike -->
+                <!-- The portrait graphic: a halftone duotone on transparency whose shoulders fade into the canvas. Pure black dots read as ink in light mode; dark inverts them to white, so one file serves both themes. -->
                 <div data-reveal class="reveal-1 max-lg:order-first lg:justify-self-end">
-                    <img src="{{ $portrait }}" alt="{{ $portraitAlt }}" width="800" height="1098" class="portrait-fade h-auto w-60 sm:w-72 lg:w-88">
+                    <img src="{{ $portrait }}" alt="{{ $portraitAlt }}" width="720" height="956" class="portrait-fade h-auto w-60 dark:invert sm:w-72 lg:w-88">
                 </div>
             @endif
         </div>
