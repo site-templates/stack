@@ -44,7 +44,7 @@
             @if ($showPortrait)
                 <!-- The portrait graphic: a halftone duotone on transparency whose shoulders fade into the canvas. Pure black dots read as ink in light mode; dark inverts them to white, so one file serves both themes. -->
                 <div data-reveal class="reveal-1 max-lg:order-first lg:justify-self-end">
-                    <img src="{{ $portrait }}" alt="{{ $portraitAlt }}" width="720" height="956" class="portrait-fade h-auto w-60 dark:invert sm:w-72 lg:w-88">
+                    <img src="{{ $portrait }}" alt="{{ $portraitAlt }}" width="720" height="919" class="portrait-fade h-auto w-60 dark:invert sm:w-72 lg:w-88">
                 </div>
             @endif
         </div>
