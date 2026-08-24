@@ -46,13 +46,17 @@ colored accent when editing this template.
 - Section rhythm: masthead `pt-20/pb-16` mobile → `pt-32/pb-24` desktop;
   post-list rows `py-9`; article blocks step in `mt-12`.
 - One spacing scale, 4/8-based. Whitespace is the luxury — never fill it.
-- Radius: `rounded-full` only for the portrait, avatars, and the theme
-  toggle; images `rounded-[min(1vw,12px)]`; everything else square or hairline.
+- Radius: `rounded-full` only for the social buttons and pagination arrows;
+  article images `rounded-[min(1vw,12px)]`; everything else square or hairline.
 
 ## Components
 
 - **Nav**: fixed, transparent at top; scrolling under it adds a translucent
   canvas + hairline (`data-scrolled`). Wordmark is the author's name in serif.
+- **Masthead**: a serif greeting statement, one short bio, social buttons, and
+  the portrait graphic on the right — a background-free B&W cutout whose
+  shoulders feather into the canvas (`portrait-fade` mask), so it melts into
+  white and near-black alike. Copy stays short; one paragraph, not an essay.
 - **Post list**: a left-aligned ledger — tabular date column, serif title,
   one-line excerpt, hairline dividers, no cards. The whole row is one `<a>`;
   hover slides a small arrow in and deepens the title to ink.

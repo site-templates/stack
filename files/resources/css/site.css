@@ -139,6 +139,18 @@ body {
 }
 
 /*
+    The masthead portrait: a background-free cutout whose lower edge feathers
+    out, so the figure melts into the canvas — white in light mode, near-black
+    in dark — like ink lifting off the page.
+*/
+@utility portrait-fade {
+    mask-image:
+        linear-gradient(to bottom, black 55%, transparent 95%),
+        linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%);
+    mask-composite: intersect;
+}
+
+/*
     The reading progress hairline on article pages. main.js drives --progress
     from scroll position; the bar only exists where the markup includes it.
 */
