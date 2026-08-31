@@ -8,7 +8,7 @@
                 <ul role="list" class="flex flex-wrap items-center gap-x-5 gap-y-2">
                     @foreach ($social as $item)
                         <li>
-                            <a href="{{ $item->url }}" class="text-base font-normal text-muted transition-colors duration-150 hover:text-ink sm:text-sm">{{ $item->label }}</a>
+                            <a href="{{ $item->url }}" target="_blank" rel="noopener" class="text-base font-normal text-muted transition-colors duration-150 hover:text-ink sm:text-sm">{{ $item->label }}</a>
                         </li>
                     @endforeach
                 </ul>
