@@ -5,18 +5,52 @@
     system) theme and adds the .js class; everything here builds on that.
     Every effect degrades cleanly: without this file the page is fully
     visible, all posts show, and navigation still works.
+
+    Pages change in place (data-instant-navigation on <body>): the header
+    binds once, while everything inside <main> is torn down and set up again
+    for each new page through setUp(root).
 */
 
-document.addEventListener('DOMContentLoaded', function () {
+var REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+// What the current <main> owns — released before the next one is set up.
+var revealObserver = null;
+var progressUpdate = null;
+
+// The header persists for the whole visit, so it binds once.
+markCurrentMenuItem();
+stickyHeader();
+themeToggle();
+
+// This script sits at the end of <body>: the page is already parsed.
+setUp(document);
+
+document.addEventListener('instant:navigated', function (event) {
     markCurrentMenuItem();
-    stickyHeader();
-    themeToggle();
-    revealOnScroll();
-    paginatePosts();
-    readingProgress();
+    setUp(event.detail.main);
 });
 
-var REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)');
+// Everything that lives inside <main>, set up for the given root.
+function setUp(root) {
+    tearDown();
+    revealOnScroll(root);
+    paginatePosts(root);
+    readingProgress(root);
+}
+
+// Let go of what the previous <main> was driving.
+function tearDown() {
+    if (revealObserver) {
+        revealObserver.disconnect();
+        revealObserver = null;
+    }
+
+    if (progressUpdate) {
+        window.removeEventListener('scroll', progressUpdate);
+        window.removeEventListener('resize', progressUpdate);
+        progressUpdate = null;
+    }
+}
 
 // The header only grows a background and a hairline once content scrolls under it.
 function stickyHeader() {
@@ -48,17 +82,20 @@ function themeToggle() {
 }
 
 // aria-current tells screen readers which page you are on, and styles the active link.
+// Recomputed after every in-place navigation, so the mark follows the page.
 function markCurrentMenuItem() {
     document.querySelectorAll('#header nav a').forEach(function (item) {
         if (item.pathname === window.location.pathname) {
             item.setAttribute('aria-current', 'page');
+        } else {
+            item.removeAttribute('aria-current');
         }
     });
 }
 
 // Flip .is-visible on each [data-reveal] as it scrolls into view — once.
-function revealOnScroll() {
-    var revealed = document.querySelectorAll('[data-reveal]');
+function revealOnScroll(root) {
+    var revealed = root.querySelectorAll('[data-reveal]');
     if (!revealed.length) return;
 
     if (!('IntersectionObserver' in window) || REDUCED_MOTION.matches) {
@@ -76,6 +113,7 @@ function revealOnScroll() {
     }, { rootMargin: '0px 0px -8% 0px' });
 
     revealed.forEach(function (el) { observer.observe(el); });
+    revealObserver = observer;
 }
 
 /*
@@ -83,9 +121,9 @@ function revealOnScroll() {
     the DOM (and visible without JavaScript); this chunks them into pages and
     replays a staggered entrance on each turn.
 */
-function paginatePosts() {
-    var list = document.querySelector('[data-posts]');
-    var controls = document.querySelector('[data-pagination]');
+function paginatePosts(root) {
+    var list = root.querySelector('[data-posts]');
+    var controls = root.querySelector('[data-pagination]');
     if (!list || !controls) return;
 
     var rows = Array.prototype.slice.call(list.querySelectorAll('[data-post-row]'));
@@ -137,9 +175,9 @@ function paginatePosts() {
 }
 
 // A 1px hairline along the top of article pages tracks reading position.
-function readingProgress() {
-    var bar = document.querySelector('[data-progress]');
-    var article = document.querySelector('[data-article]');
+function readingProgress(root) {
+    var bar = root.querySelector('[data-progress]');
+    var article = root.querySelector('[data-article]');
     if (!bar || !article) return;
 
     function update() {
@@ -152,4 +190,5 @@ function readingProgress() {
     update();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update, { passive: true });
+    progressUpdate = update;
 }

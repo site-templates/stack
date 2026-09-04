@@ -35,7 +35,7 @@
     <!-- The line below loads Tailwind and inlines your resources/css/site.css -->
     @vite('resources/css/site.css')
 </head>
-<body class="isolate bg-canvas font-sans text-ink antialiased">
+<body class="isolate bg-canvas font-sans text-ink antialiased" data-instant-navigation>
     <x-nav :links="$site->nav_links"/>
 
     <main>
